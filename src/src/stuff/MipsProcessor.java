@@ -13,38 +13,38 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class MipsProcessor {
 
-    Queue<String> instructions;
+    Queue<Instruction> instructions;
+    List<Integer> aluOutputs;
+
     String currentInstruction;
-    Boolean RegDst, RegWrite, ALUSrcA, MemRead;
-    Boolean MemWrite, MemtoReg, IorD, IRWrite, PCWrite;
-    char ALUOp, ALUSrcB, PCSource;
+    ControlSignalSetting currentSetting;
+    ProcessorState currentState;
+    ProcessorRegisters processorRegisters;
+
+    public MipsProcessor(Queue<Instruction> instructions){
+        currentState = ProcessorState.ZERO;
+        processorRegisters = new ProcessorRegisters();
+
+        this.instructions = instructions;
+    }
 
     public MipsProcessor(String instructionsFile){
-        instructions = new LinkedBlockingQueue<String>();
+        currentState = ProcessorState.ZERO;
+        processorRegisters = new ProcessorRegisters();
 
+        instructions = new LinkedBlockingQueue<Instruction>();
         File file = new File(instructionsFile);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = null;
             while ((line = reader.readLine()) != null) {
-                instructions.add(line);
+                instructions.add(new Instruction(line));
             }
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
         }
     }
 
+    public void executeCycle(){
 
-
-/*
-    public void runCycleOne(){
-        setCurrentInstruction(instructions.remove());
     }
-
-    public String getCurrentInstruction(){
-        return currentInstruction;
-    }
-
-    public void setCurrentInstruction(String newInstruction){
-        currentInstruction = newInstruction;
-    }*/
 }

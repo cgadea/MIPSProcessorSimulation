@@ -8,7 +8,8 @@ public class ProcessorStateTests {
 
     @Test
     public void stateZeroYieldsStateOne(){
-        assertEquals(ProcessorState.ONE, ProcessorState.ZERO.nextState());
+        Instruction instruction = new Instruction("00000000001000101000000000100000");
+        assertEquals(ProcessorState.ONE, ProcessorState.ZERO.nextState(instruction));
     }
 
 }

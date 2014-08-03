@@ -4,82 +4,210 @@ public enum ProcessorState {
 
     ZERO {
         @Override
-        public ProcessorState nextState(){
-            System.out.print("");
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                false,false,false,true,false,false,false,true,true,0,1,0
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             return ONE;
         }
     },
     ONE {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                false,false,false,false,false,false,false,false,false,0,3,0
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return TWO;
         }
     },
     TWO {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                false,false,true,false,false,false,false,false,false,0,2,0
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return THREE;
         }
     },
     THREE {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                false,false,false,true,false,false,true,false,false,0,2,0
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return FOUR;
         }
     },
     FOUR {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                false,true,false,false,true,false,false,false,false,0,2,0
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return FIVE;
         }
     },
     FIVE {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                false,false,false,false,true,false,true,false,false,0,2,0
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return SIX;
         }
     },
     SIX {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn){
+            if (fn.equals("ADD")){
+                return new ControlSignalSetting(false,false,true,false,false,false,false,false,false,0,0,0);
+            } else if (fn.equals("SUB")){
+                return new ControlSignalSetting(false,false,true,false,false,false,false,false,false,1,0,0);
+            } else {
+                return new ControlSignalSetting(false,false,true,false,false,false,false,false,false,2,0,0);
+            }
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return SEVEN;
         }
     },
     SEVEN {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                true,true,false,false,false,false,false,false,false,0,2,0
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return EIGHT;
         }
     },
     EIGHT {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn){
+            if (fn.equals("BEQ") || fn.equals("BNE")){
+                return new ControlSignalSetting(
+                    false,false,true,false,false,false,false,false,false,0,0,1
+                );
+            } else if (fn.equals("ADDI")) {
+                return new ControlSignalSetting(
+                    false,false,true,false,false,false,false,false,false,0,2,1
+                );
+            } else {
+                return new ControlSignalSetting(
+                    false,false,false,false,false,false,false,false,false,2,2,1
+                );
+            }
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return NINE;
         }
     },
     NINE {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                false,false,false,false,false,false,false,false,true,0,3,2
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return TEN;
         }
     },
     TEN {
         @Override
-        public ProcessorState nextState(){
+        public ControlSignalSetting getSetting(String fn) {
+            return getSetting();
+        }
+
+        public ControlSignalSetting getSetting(){
+            return new ControlSignalSetting(
+                false,true,false,false,true,false,false,false,false,0,0,0
+            );
+        }
+
+        @Override
+        public ProcessorState nextState(Instruction instruction){
             System.out.print("");
             return ZERO;
         }
     };
 
-    public abstract ProcessorState nextState();
+    public abstract ControlSignalSetting getSetting(String fn);
+
+    public abstract ProcessorState nextState(Instruction instruction);
 
 }
