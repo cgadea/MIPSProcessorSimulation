@@ -10,9 +10,8 @@ public class Instruction {
     String functI;
     int immediate;
     String jumpaddress;
-    int cycle = 1;
 
-    public String Instruction(String binaryInstruction) {
+    public Instruction(String binaryInstruction) {
         int opCodeInt = Integer.parseInt(binaryInstruction.substring(0, 5), 2);
         if ((opCodeInt == 3) || (opCodeInt == 4) || (opCodeInt == 5) || (opCodeInt == 13) || (opCodeInt == 8)){
             opCode = "I";
@@ -73,6 +72,5 @@ public class Instruction {
         else{
             opCode = "Invalid";
         }
-    return opCode;
     }
 }
