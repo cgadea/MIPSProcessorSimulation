@@ -19,8 +19,6 @@ public class MipsProcessor {
     Boolean MemWrite, MemtoReg, IorD, IRWrite, PCWrite;
     char ALUOp, ALUSrcB, PCSource;
 
-    //Call Cycle 1
-
     public MipsProcessor(String instructionsFile){
         instructions = new LinkedBlockingQueue<String>();
 
@@ -34,13 +32,8 @@ public class MipsProcessor {
             System.err.format("IOException: %s%n", x);
         }
     }
-    //Input line as array
-    //define opCode as array from [0]-[5]
-    //define funct as array from [26]-[31]
 
-    public void executeCycle(State state){
 
-    }
 
 /*
     public void runCycleOne(){

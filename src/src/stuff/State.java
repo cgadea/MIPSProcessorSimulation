@@ -16,12 +16,16 @@ public class State {
     public char ALUSrcB = 1;
     public char PCSource = 0;
 
-    // IorD = 0, decode by calling Mux1
-    //Get instruction address if MemRead = 1
-    //Store in AddrMem
-    //Get instruction
-    //Store in Inst. Register when IRWrite = 1
-    //ALUSrcA = 0 & ALUOp = 00 so ALU is called
-    //PCWrite = 1 increment PC by 1
+    //State 0ne
+
+    //State two
+    //State three
+    //State four
+    //State five
+    //State six
+    //State seven
+    //State eight
+    //State nine
+    //State ten
 
 }
