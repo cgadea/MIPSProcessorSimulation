@@ -4,24 +4,19 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class MipsProcessor {
 
-    Queue<Instruction> instructions;
+    Instruction[] instructions;
     List<Integer> aluOutputs;
 
-    String currentInstruction;
+    Instruction currentInstruction;
     ControlSignalSetting currentSetting;
     ProcessorState currentState;
     ProcessorRegisters processorRegisters;
 
-    public MipsProcessor(Queue<Instruction> instructions){
+    public MipsProcessor(Instruction[] instructions){
         currentState = ProcessorState.ZERO;
         processorRegisters = new ProcessorRegisters();
 
@@ -32,12 +27,14 @@ public class MipsProcessor {
         currentState = ProcessorState.ZERO;
         processorRegisters = new ProcessorRegisters();
 
-        instructions = new LinkedBlockingQueue<Instruction>();
+        instructions = new Instruction[100];
+        int cnt = 0;
         File file = new File(instructionsFile);
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = null;
             while ((line = reader.readLine()) != null) {
-                instructions.add(new Instruction(line));
+                instructions[cnt] = new Instruction(line);
+                cnt++;
             }
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
@@ -45,6 +42,47 @@ public class MipsProcessor {
     }
 
     public void executeCycle(){
+        if (currentState == ProcessorState.ZERO) {
+            currentInstruction = instructions[processorRegisters.getPc()];
+            processorRegisters.setAluOut(processorRegisters.getPc() + 1);
+        } else if (currentState == ProcessorState.ONE) {
+            int rs = currentInstruction.getRs();
+            int rt = currentInstruction.getRt();
+            if (currentInstruction.getOpCode().equals("R")) {
+                processorRegisters.setA(processorRegisters.getMemoryAt(rs));
+                processorRegisters.setB(processorRegisters.getMemoryAt(rt));
+            } else if (currentInstruction.getOpCode().equals("I")) {
+                if (currentInstruction.getFunctI() == "BEQ" || currentInstruction.getFunctI() == "BNE") {
+                    processorRegisters.setAluOut(processorRegisters.getPc() + currentInstruction.getImmediate());
+                } else {
+                    processorRegisters.setA(processorRegisters.getMemoryAt(rs));
+                }
+            }
+        } else if (currentState == ProcessorState.TWO) {
+            if (currentInstruction.getOpCode().equals("dataTransfer")) {
+                processorRegisters.setAluOut(processorRegisters.getA() + currentInstruction.getImmediate());
+            }
+        }
+        currentState = currentState.nextState(currentInstruction);
+    }
 
+    public void setCurrentState(ProcessorState state){
+        currentState = state;
+    }
+
+    public void setCurrentInstruction(Instruction instruction){
+        currentInstruction = instruction;
+    }
+
+    public ProcessorRegisters getProcessorRegisters(){
+        return processorRegisters;
+    }
+
+    public void setProcessorRegisters(ProcessorRegisters processorRegisters){
+        this.processorRegisters = processorRegisters;
+    }
+
+    public ProcessorState getCurrentState() {
+        return currentState;
     }
 }

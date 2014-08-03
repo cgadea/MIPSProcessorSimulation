@@ -51,8 +51,11 @@ public enum ProcessorState {
 
         @Override
         public ProcessorState nextState(Instruction instruction){
-            System.out.print("");
-            return THREE;
+            if (instruction.getFunctI().equals("LW")) {
+                return THREE;
+            } else {
+                return FIVE;
+            }
         }
     },
     THREE {
