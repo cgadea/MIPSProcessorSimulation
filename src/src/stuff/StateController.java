@@ -4,6 +4,7 @@ package stuff;
  * Created by Owner on 8/2/2014.
  */
 public class StateController {
+    /*
     public State ControlState(int cycle) {
         Instruction Instruct = new Instruction();
         if (cycle == 1) {
@@ -339,5 +340,5 @@ public class StateController {
             return four;
         }
     }
-
+    */
 }
