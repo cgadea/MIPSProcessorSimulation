@@ -22,4 +22,8 @@ public class ProcessorTests {
         assertEquals("add $s1 $s3 $s3", myProcessor.getCurrentInstruction());
     }
 
+    @Test
+    public void duringCycleOneProgramCounterIncrements(){
+
+    }
 }
