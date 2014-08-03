@@ -65,4 +65,36 @@ public class ProcessorTests {
         assertEquals(ProcessorState.THREE,processor.getCurrentState());
         assertEquals(7,processor.getProcessorRegisters().getAluOut());
     }
+
+    @Test
+    public void testStateThreeLogic(){
+        String binInstruction = "10001100110100100000000000000010";
+        Instruction instruction = new Instruction(binInstruction);
+        processor.setCurrentInstruction(instruction);
+        processor.setCurrentState(ProcessorState.THREE);
+        ProcessorRegisters registers = new ProcessorRegisters();
+        registers.setMemoryAt(6, 15);
+        processor.setProcessorRegisters(registers);
+
+        processor.executeCycle();
+
+        assertEquals(ProcessorState.FOUR,processor.getCurrentState());
+        assertEquals(17,processor.getProcessorRegisters().getAluOut());
+    }
+
+    @Test
+    public void testStateFourLogic(){
+        String binInstruction = "10001100110100100000000000000010";
+        Instruction instruction = new Instruction(binInstruction);
+        processor.setCurrentInstruction(instruction);
+        processor.setCurrentState(ProcessorState.FOUR);
+        ProcessorRegisters registers = new ProcessorRegisters();
+        registers.setAluOut(12);
+        processor.setProcessorRegisters(registers);
+
+        processor.executeCycle();
+
+        assertEquals(ProcessorState.ZERO,processor.getCurrentState());
+        assertEquals(12,processor.getProcessorRegisters().getMemoryAt(instruction.getRt()));
+    }
 }

@@ -20,6 +20,7 @@ public class ProcessorRegisters {
     public ProcessorRegisters() {
         aluOut = 0;
         pc = 0;
+        //initialize memory
     }
 
     public int getAluOut() {

@@ -91,7 +91,7 @@ public enum ProcessorState {
         @Override
         public ProcessorState nextState(Instruction instruction){
             System.out.print("");
-            return FIVE;
+            return ZERO;
         }
     },
     FIVE {

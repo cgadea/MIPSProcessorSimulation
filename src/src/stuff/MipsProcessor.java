@@ -62,7 +62,12 @@ public class MipsProcessor {
             if (currentInstruction.getOpCode().equals("dataTransfer")) {
                 processorRegisters.setAluOut(processorRegisters.getA() + currentInstruction.getImmediate());
             }
+        } else if (currentState == ProcessorState.THREE) {
+            processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs()) + currentInstruction.getImmediate());
+        } else if (currentState == ProcessorState.FOUR) {
+            processorRegisters.setMemoryAt(currentInstruction.getRt(),processorRegisters.getAluOut());
         }
+
         currentState = currentState.nextState(currentInstruction);
     }
 
