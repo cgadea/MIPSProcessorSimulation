@@ -173,7 +173,7 @@ public class ProcessorTests {
 
         processor.executeCycle();
 
-        assertEquals(ProcessorState.TEN,processor.getCurrentState());
+        assertEquals(ProcessorState.ZERO,processor.getCurrentState());
         assertEquals(14,processor.getProcessorRegisters().getAluOut());
     }
 

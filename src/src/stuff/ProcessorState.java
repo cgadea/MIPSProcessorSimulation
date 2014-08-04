@@ -10,7 +10,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                false,false,false,true,false,false,false,true,true,0,1,0
+                    false,false,false,true,false,false,false,true,true,0,1,0
             );
         }
 
@@ -27,7 +27,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                false,false,false,false,false,false,false,false,false,0,3,0
+                    false,false,false,false,false,false,false,false,false,0,3,0
             );
         }
 
@@ -52,7 +52,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                false,false,true,false,false,false,false,false,false,0,2,0
+                    false,false,true,false,false,false,false,false,false,0,2,0
             );
         }
 
@@ -73,7 +73,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                false,false,false,true,false,false,true,false,false,0,2,0
+                    false,false,false,true,false,false,true,false,false,0,2,0
             );
         }
 
@@ -91,7 +91,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                false,true,false,false,true,false,false,false,false,0,2,0
+                    false,true,false,false,true,false,false,false,false,0,2,0
             );
         }
 
@@ -109,7 +109,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                false,false,false,false,true,false,true,false,false,0,2,0
+                    false,false,false,false,true,false,true,false,false,0,2,0
             );
         }
 
@@ -145,7 +145,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                true,true,false,false,false,false,false,false,false,0,2,0
+                    true,true,false,false,false,false,false,false,false,0,2,0
             );
         }
 
@@ -160,15 +160,15 @@ public enum ProcessorState {
         public ControlSignalSetting getSetting(String fn){
             if (fn.equals("BEQ") || fn.equals("BNE")){
                 return new ControlSignalSetting(
-                    false,false,true,false,false,false,false,false,false,0,0,1
+                        false,false,true,false,false,false,false,false,false,0,0,1
                 );
             } else if (fn.equals("ADDI")) {
                 return new ControlSignalSetting(
-                    false,false,true,false,false,false,false,false,false,0,2,1
+                        false,false,true,false,false,false,false,false,false,0,2,1
                 );
             } else {
                 return new ControlSignalSetting(
-                    false,false,false,false,false,false,false,false,false,2,2,1
+                        false,false,false,false,false,false,false,false,false,2,2,1
                 );
             }
         }
@@ -176,7 +176,7 @@ public enum ProcessorState {
         @Override
         public ProcessorState nextState(Instruction instruction){
             System.out.print("");
-            return TEN;
+            return ZERO;
         }
     },
     NINE {
@@ -187,7 +187,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                false,false,false,false,false,false,false,false,true,0,3,2
+                    false,false,false,false,false,false,false,false,true,0,3,2
             );
         }
 
@@ -205,7 +205,7 @@ public enum ProcessorState {
 
         public ControlSignalSetting getSetting(){
             return new ControlSignalSetting(
-                false,true,false,false,true,false,false,false,false,0,0,0
+                    false,true,false,false,true,false,false,false,false,0,0,0
             );
         }
 
