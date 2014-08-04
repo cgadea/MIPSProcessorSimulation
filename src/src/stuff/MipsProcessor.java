@@ -34,6 +34,7 @@ public class MipsProcessor {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 instructions[cnt] = new Instruction(line);
+                System.out.println(instructions[cnt]);
                 cnt++;
             }
         } catch (IOException x) {
@@ -76,7 +77,7 @@ public class MipsProcessor {
                 processorRegisters.setB(processorRegisters.getMemoryAt(rt));
             } else if (currentInstruction.getOpCode().equals("I")) {
                 if (currentInstruction.getFunctI() == "BEQ" || currentInstruction.getFunctI() == "BNE") {
-                    processorRegisters.setAluOut(processorRegisters.getPc() + currentInstruction.getImmediate());
+                    processorRegisters.setPc(processorRegisters.getAluOut() + currentInstruction.getImmediate());
                 } else {
                     processorRegisters.setA(processorRegisters.getMemoryAt(rs));
                 }
