@@ -164,7 +164,7 @@ public class ProcessorTests {
 
     @Test
     public void testStateNineLogic(){
-        String binInstruction = "00001000000000000000000000000010";
+        String binInstruction = "00001000000000000000000000000011";
         Instruction instruction = new Instruction(binInstruction);
         processor.setCurrentInstruction(instruction);
         processor.setCurrentState(ProcessorState.NINE);
@@ -174,6 +174,6 @@ public class ProcessorTests {
         processor.executeCycle();
 
         assertEquals(ProcessorState.ZERO,processor.getCurrentState());
-        assertEquals(2,processor.getProcessorRegisters().getPc());
+        assertEquals(3,processor.getProcessorRegisters().getPc());
     }
 }
