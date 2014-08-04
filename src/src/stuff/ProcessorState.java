@@ -145,7 +145,7 @@ public enum ProcessorState {
         @Override
         public ProcessorState nextState(Instruction instruction){
             System.out.print("");
-            return EIGHT;
+            return ZERO;
         }
     },
     EIGHT {
@@ -169,7 +169,7 @@ public enum ProcessorState {
         @Override
         public ProcessorState nextState(Instruction instruction){
             System.out.print("");
-            return NINE;
+            return TEN;
         }
     },
     NINE {
@@ -187,7 +187,7 @@ public enum ProcessorState {
         @Override
         public ProcessorState nextState(Instruction instruction){
             System.out.print("");
-            return TEN;
+            return ZERO;
         }
     },
     TEN {

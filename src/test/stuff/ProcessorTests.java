@@ -97,4 +97,83 @@ public class ProcessorTests {
         assertEquals(ProcessorState.ZERO,processor.getCurrentState());
         assertEquals(12,processor.getProcessorRegisters().getMemoryAt(instruction.getRt()));
     }
+    /*@Test
+    public void testStateFiveLogic(){
+        String binInstruction = "10001100110100100000000000000010";
+        Instruction instruction = new Instruction(binInstruction);
+        processor.setCurrentInstruction(instruction);
+        processor.setCurrentState(ProcessorState.FIVE);
+        ProcessorRegisters registers = new ProcessorRegisters();
+        registers.setAluOut(12);
+        processor.setProcessorRegisters(registers);
+
+        processor.executeCycle();
+
+        assertEquals(ProcessorState.ZERO,processor.getCurrentState());
+        assertEquals(12,processor.getProcessorRegisters().getMemoryAt(instruction.getRt()));
+    }*/
+
+    @Test
+    public void testStateSixLogic(){
+        String binInstruction = "00000000001000100001100010000000";
+        Instruction instruction = new Instruction(binInstruction);
+        processor.setCurrentInstruction(instruction);
+        processor.setCurrentState(ProcessorState.SIX);
+        ProcessorRegisters registers = new ProcessorRegisters();
+        registers.setMemoryAt(1,2);
+        registers.setMemoryAt(2,5);
+        processor.setProcessorRegisters(registers);
+
+        processor.executeCycle();
+
+        assertEquals(ProcessorState.SEVEN,processor.getCurrentState());
+        assertEquals(10,processor.getProcessorRegisters().getAluOut());
+    }
+
+    @Test
+    public void testStateSevenLogic(){
+        String binInstruction = "00000000001000100001100010000000";
+        Instruction instruction = new Instruction(binInstruction);
+        processor.setCurrentInstruction(instruction);
+        processor.setCurrentState(ProcessorState.SEVEN);
+        ProcessorRegisters registers = new ProcessorRegisters();
+        registers.setAluOut(10);
+        processor.setProcessorRegisters(registers);
+
+        processor.executeCycle();
+
+        assertEquals(ProcessorState.ZERO,processor.getCurrentState());
+        assertEquals(10,processor.getProcessorRegisters().getMemoryAt(instruction.getRd()));
+    }
+    @Test
+    public void testStateEightLogic(){
+        String binInstruction = "00110100001000100000000000001100";
+        Instruction instruction = new Instruction(binInstruction);
+        processor.setCurrentInstruction(instruction);
+        processor.setCurrentState(ProcessorState.EIGHT);
+        ProcessorRegisters registers = new ProcessorRegisters();
+        registers.setMemoryAt(1,2);
+        registers.setMemoryAt(2,5);
+        processor.setProcessorRegisters(registers);
+
+        processor.executeCycle();
+
+        assertEquals(ProcessorState.TEN,processor.getCurrentState());
+        assertEquals(10,processor.getProcessorRegisters().getAluOut());
+    }
+
+    @Test
+    public void testStateNineLogic(){
+        String binInstruction = "00001000000000000000000000000010";
+        Instruction instruction = new Instruction(binInstruction);
+        processor.setCurrentInstruction(instruction);
+        processor.setCurrentState(ProcessorState.NINE);
+        ProcessorRegisters registers = new ProcessorRegisters();
+        processor.setProcessorRegisters(registers);
+
+        processor.executeCycle();
+
+        assertEquals(ProcessorState.ZERO,processor.getCurrentState());
+        assertEquals(10,processor.getProcessorRegisters().getPc());
+    }
 }

@@ -66,7 +66,38 @@ public class MipsProcessor {
             processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs()) + currentInstruction.getImmediate());
         } else if (currentState == ProcessorState.FOUR) {
             processorRegisters.setMemoryAt(currentInstruction.getRt(),processorRegisters.getAluOut());
+        } /*else if (currentState == ProcessorState.FIVE) {
+            processorRegisters.setMemoryAt(currentInstruction.getRt(),processorRegisters.getAluOut());
+        }*/else if (currentState == ProcessorState.SIX) {
+            if (currentInstruction.getFunct() == "ADD"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())+processorRegisters.getMemoryAt(currentInstruction.getRt()));
+            } else if (currentInstruction.getFunct() == "SUB"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())-processorRegisters.getMemoryAt(currentInstruction.getRt()));
+            /*} else if (currentInstruction.getFunct() == "NOR"){
+                processorRegisters.setAluOut(~(processorRegisters.getMemoryAt(currentInstruction.getRs())|processorRegisters.getMemoryAt(currentInstruction.getRt())));
+            */} else if (currentInstruction.getFunct() == "AND"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())&processorRegisters.getMemoryAt(currentInstruction.getRt()));
+            } else if (currentInstruction.getFunct() == "SLL"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())<<currentInstruction.getShamt());
+            } else if (currentInstruction.getFunct() == "SRL"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())>>currentInstruction.getShamt());
+            }
+        } else if (currentState == ProcessorState.SEVEN) {
+            processorRegisters.setMemoryAt(currentInstruction.getRd(),processorRegisters.getAluOut());
+        } else if (currentState == ProcessorState.EIGHT) {
+            if (currentInstruction.getFunctI() == "BEQ"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())-processorRegisters.getMemoryAt(currentInstruction.getRt()));
+            } else if (currentInstruction.getFunctI() == "BNE"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())-processorRegisters.getMemoryAt(currentInstruction.getRt()));
+            } else if (currentInstruction.getFunctI() == "ORI"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())|currentInstruction.getImmediate());
+            } else if (currentInstruction.getFunctI() == "ADDI"){
+                processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())+currentInstruction.getImmediate());
+            }
+        } else if (currentState == ProcessorState.NINE) {
+            processorRegisters.setPc(currentInstruction.getInstructionToSkip());
         }
+
 
         currentState = currentState.nextState(currentInstruction);
     }
