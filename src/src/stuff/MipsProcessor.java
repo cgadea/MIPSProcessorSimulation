@@ -73,9 +73,12 @@ public class MipsProcessor {
                 processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())+processorRegisters.getMemoryAt(currentInstruction.getRt()));
             } else if (currentInstruction.getFunct() == "SUB"){
                 processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())-processorRegisters.getMemoryAt(currentInstruction.getRt()));
-            /*} else if (currentInstruction.getFunct() == "NOR"){
-                processorRegisters.setAluOut(~(processorRegisters.getMemoryAt(currentInstruction.getRs())|processorRegisters.getMemoryAt(currentInstruction.getRt())));
-            */} else if (currentInstruction.getFunct() == "AND"){
+            } else if (currentInstruction.getFunct() == "NOR"){
+                int rsVal = processorRegisters.getMemoryAt(currentInstruction.getRs());
+                int rtVal = processorRegisters.getMemoryAt(currentInstruction.getRt());
+                int result = ~(rsVal|rtVal) & 0x0001F;
+                processorRegisters.setAluOut(result);
+            } else if (currentInstruction.getFunct() == "AND"){
                 processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())&processorRegisters.getMemoryAt(currentInstruction.getRt()));
             } else if (currentInstruction.getFunct() == "SLL"){
                 processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())<<currentInstruction.getShamt());

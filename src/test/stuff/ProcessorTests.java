@@ -115,19 +115,19 @@ public class ProcessorTests {
 
     @Test
     public void testStateSixLogic(){
-        String binInstruction = "00000000001000100001100010000000";
+        String binInstruction = "00000000001000100001100010100111";
         Instruction instruction = new Instruction(binInstruction);
         processor.setCurrentInstruction(instruction);
         processor.setCurrentState(ProcessorState.SIX);
         ProcessorRegisters registers = new ProcessorRegisters();
-        registers.setMemoryAt(1,2);
+        registers.setMemoryAt(1,6);
         registers.setMemoryAt(2,5);
         processor.setProcessorRegisters(registers);
 
         processor.executeCycle();
 
         assertEquals(ProcessorState.SEVEN,processor.getCurrentState());
-        assertEquals(8,processor.getProcessorRegisters().getAluOut());
+        assertEquals(24,processor.getProcessorRegisters().getAluOut());
     }
 
     @Test
