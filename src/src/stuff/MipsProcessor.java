@@ -115,12 +115,12 @@ public class MipsProcessor {
             if (currentInstruction.getFunctI() == "BEQ"){
                 processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())-processorRegisters.getMemoryAt(currentInstruction.getRt()));
                 if (processorRegisters.getAluOut() == 0){
-                    processorRegisters.setPc(currentInstruction.getImmediate());
+                    processorRegisters.setPc(processorRegisters.getPc()+currentInstruction.getImmediate());
                 }
             } else if (currentInstruction.getFunctI() == "BNE"){
                 processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())-processorRegisters.getMemoryAt(currentInstruction.getRt()));
                 if (processorRegisters.getAluOut() != 0){
-                    processorRegisters.setPc(currentInstruction.getImmediate());
+                    processorRegisters.setPc(processorRegisters.getPc()+currentInstruction.getImmediate());
                 }
             } else if (currentInstruction.getFunctI() == "ORI"){
                 processorRegisters.setAluOut(processorRegisters.getMemoryAt(currentInstruction.getRs())|currentInstruction.getImmediate());

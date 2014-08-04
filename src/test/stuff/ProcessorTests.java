@@ -169,6 +169,7 @@ public class ProcessorTests {
         ProcessorRegisters registers = new ProcessorRegisters();
         registers.setMemoryAt(1,2);
         registers.setMemoryAt(2,5);
+        registers.setPc(2);
         processor.setProcessorRegisters(registers);
 
         processor.executeCycle();
