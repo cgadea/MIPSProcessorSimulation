@@ -63,6 +63,10 @@ public class MipsProcessor {
     public void executeCycle(){
         if (currentState == ProcessorState.ZERO) {
             currentInstruction = instructions[processorRegisters.getPc()];
+            if (currentInstruction == null){
+                System.out.println("No more instructions!");
+                System.exit(0);
+            }
             processorRegisters.setAluOut(processorRegisters.getPc() + 1);
         } else if (currentState == ProcessorState.ONE) {
             int rs = currentInstruction.getRs();
