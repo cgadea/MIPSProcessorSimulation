@@ -23,7 +23,7 @@ public class MipsProcessor {
         this.instructions = instructions;
     }
 
-    public MipsProcessor(String instructionsFile){
+    public MipsProcessor(String instructionsFile, String memoryFile){
         currentState = ProcessorState.ZERO;
         processorRegisters = new ProcessorRegisters();
 
@@ -39,6 +39,25 @@ public class MipsProcessor {
         } catch (IOException x) {
             System.err.format("IOException: %s%n", x);
         }
+
+        int[] memory = new int[100];
+        cnt = 0;
+        file = new File(memoryFile);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                memory[cnt] = Integer.parseInt(line);
+                cnt++;
+            }
+        } catch (IOException x) {
+            System.err.format("IOException: %s%n", x);
+        }
+
+        processorRegisters.setMemory(memory);
+    }
+
+    public Instruction[] getInstructions(){
+        return instructions;
     }
 
     public void executeCycle(){

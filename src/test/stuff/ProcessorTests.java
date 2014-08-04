@@ -1,5 +1,6 @@
 package stuff;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -21,6 +22,20 @@ public class ProcessorTests {
         instructions[1] = new Instruction("00100000011100000000000000000100");
         instructions[2] = new Instruction("00001000000000000000000000000010");
         processor = new MipsProcessor(instructions);
+    }
+
+    @Test
+    public void testInitializeFromFiles(){
+        instructions = new Instruction[100];
+        instructions[0] = new Instruction("00000000001000101000000000100000");
+        instructions[1] = new Instruction("00100000011100000000000000000100");
+        instructions[2] = new Instruction("00001000000000000000000000000010");
+        String instructionsFile = "C:\\Users\\....";
+        String memoryFile = "C...";
+        processor = new MipsProcessor(instructionsFile, memoryFile);
+        assertArrayEquals(new int[] {1,3,7},processor.getProcessorRegisters().getMemory());
+        assertArrayEquals(instructions, processor.getInstructions());
+
     }
 
     @Test
@@ -79,7 +94,7 @@ public class ProcessorTests {
         processor.executeCycle();
 
         assertEquals(ProcessorState.FOUR,processor.getCurrentState());
-        assertEquals(17,processor.getProcessorRegisters().getAluOut());
+        assertEquals(17, processor.getProcessorRegisters().getAluOut());
     }
 
     @Test
@@ -121,7 +136,7 @@ public class ProcessorTests {
         processor.setCurrentState(ProcessorState.SIX);
         ProcessorRegisters registers = new ProcessorRegisters();
         registers.setMemoryAt(1,6);
-        registers.setMemoryAt(2,5);
+        registers.setMemoryAt(2, 5);
         processor.setProcessorRegisters(registers);
 
         processor.executeCycle();
