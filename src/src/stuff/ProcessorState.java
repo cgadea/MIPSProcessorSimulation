@@ -33,8 +33,15 @@ public enum ProcessorState {
 
         @Override
         public ProcessorState nextState(Instruction instruction){
-            System.out.print("");
-            return TWO;
+            if (instruction.getOpCode().equals("I")) {
+                return EIGHT;
+            } else if (instruction.getOpCode().equals("J")) {
+                return NINE;
+            } else if (instruction.getOpCode().equals("R")) {
+                return SIX;
+            } else {
+                return TWO;
+            }
         }
     },
     TWO {

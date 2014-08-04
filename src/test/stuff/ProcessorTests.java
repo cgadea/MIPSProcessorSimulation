@@ -127,7 +127,7 @@ public class ProcessorTests {
         processor.executeCycle();
 
         assertEquals(ProcessorState.SEVEN,processor.getCurrentState());
-        assertEquals(10,processor.getProcessorRegisters().getAluOut());
+        assertEquals(8,processor.getProcessorRegisters().getAluOut());
     }
 
     @Test
@@ -159,7 +159,7 @@ public class ProcessorTests {
         processor.executeCycle();
 
         assertEquals(ProcessorState.TEN,processor.getCurrentState());
-        assertEquals(10,processor.getProcessorRegisters().getAluOut());
+        assertEquals(14,processor.getProcessorRegisters().getAluOut());
     }
 
     @Test
@@ -174,6 +174,6 @@ public class ProcessorTests {
         processor.executeCycle();
 
         assertEquals(ProcessorState.ZERO,processor.getCurrentState());
-        assertEquals(10,processor.getProcessorRegisters().getPc());
+        assertEquals(2,processor.getProcessorRegisters().getPc());
     }
 }
